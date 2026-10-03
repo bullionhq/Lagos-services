@@ -1,0 +1,41 @@
+LAGOS SERVICES — PHASE 0 PROGRESS
+=================================
+
+PHASE 0 — PRODUCT + UI/UX FOUNDATION
+
+[x] 0.1 Define primary user journeys
+[x] 0.2 Define site structure
+[x] 0.3 Define navigation
+[ ] 0.4 Design homepage
+[ ] 0.5 Design services/search page
+[ ] 0.6 Design service detail page
+[ ] 0.7 Design provider profile
+[ ] 0.8 Design "List your services" flow
+[ ] 0.9 Design admin interface
+[ ] 0.10 Define mobile layouts
+[ ] 0.11 Define typography, colors, spacing
+[ ] 0.12 Define reusable UI components
+[ ] 0.13 Review and freeze MVP design direction
+
+LOCKED DECISIONS
+----------------
+
+1. Primary user journeys are locked in the separate
+   lagos-services-primary-user-journeys.txt document.
+
+2. Site structure is locked in:
+   lagos-services-site-structure.txt
+
+3. The product uses Profiles and Services.
+   One Profile can have multiple Services.
+
+4. Public discovery is service-focused.
+   Provider profiles are reached primarily through services.
+
+5. Main public navigation:
+   Services | Categories | List Your Services
+
+NEXT STEP
+---------
+
+0.4 Design homepage.

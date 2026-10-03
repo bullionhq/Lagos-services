@@ -1,0 +1,140 @@
+LAGOS SERVICES — SERVICE DETAIL PAGE DESIGN SPEC
+================================================
+
+STATUS: LOCKED
+PHASE: 0.6 — Design service detail page
+
+PURPOSE
+-------
+The service detail page gives a service seeker enough useful information to decide whether to contact the provider.
+
+PRIMARY FLOW
+------------
+Discovery → Service Detail → Confidence → Contact
+
+URL
+---
+/services/[service-id]
+
+STRUCTURE
+---------
+1. Header
+2. Breadcrumb
+3. Service title
+4. Provider identity
+5. Location
+6. Price/rate
+7. Images
+8. Description
+9. Contact actions
+10. Service information
+11. Provider section
+12. Other provider services
+
+TOP SECTION
+-----------
+Example:
+Generator Repair & Maintenance
+Chinedu Okafor
+Lagos
+From ₦25,000
+
+Primary contact actions:
+- WhatsApp
+- Call
+
+Contact actions should be prominent.
+
+IMAGES
+------
+If provider-submitted images exist:
+- Show a primary image
+- Allow additional images
+- Keep the gallery lightweight
+
+If no images exist:
+- Use a clean neutral fallback
+- Do not fabricate provider content
+
+DESCRIPTION
+-----------
+Heading:
+"About this service"
+
+Display the submitted service description without unnecessary truncation.
+
+SERVICE INFORMATION
+-------------------
+Show available fields only:
+- Category
+- Location
+- Price
+- Price unit
+
+PROVIDER SECTION
+----------------
+Heading:
+"About [Provider Name]"
+
+Show:
+- Provider name
+- Provider bio
+- View Profile action
+
+Provider profile URL:
+/providers/[profile-id]
+
+The profile contains all approved services belonging to that provider.
+
+CONTACT BEHAVIOR
+----------------
+WhatsApp:
+- Opens a WhatsApp conversation using the provider's WhatsApp number.
+- Initial message may identify the service.
+
+Call:
+- Opens the device phone dialer using the provider's phone number.
+
+No in-app messaging.
+
+NOT-FOUND / UNAVAILABLE
+----------------------
+If the service does not exist or is no longer publicly available:
+- Show "Service not found"
+- Provide "Browse Services"
+- Do not expose admin/internal information
+
+MOBILE
+------
+Mobile-first order:
+1. Back/breadcrumb
+2. Service title
+3. Provider
+4. Location
+5. Price
+6. WhatsApp / Call
+7. Image
+8. About this service
+9. Service information
+10. Provider section
+11. Other services
+
+MVP EXCLUSIONS
+--------------
+Do not add:
+- Reviews
+- Ratings
+- Favorites/saves
+- Booking calendar
+- Online payments
+- Escrow
+- In-app chat
+- Provider verification badges
+- Provider ranking labels
+- Complex recommendations
+
+ARCHITECTURE RULE
+-----------------
+Services are the public discovery unit.
+Profiles contain provider identity and multiple services.
+The service detail page links to the provider profile, where the provider's other approved services can be discovered.

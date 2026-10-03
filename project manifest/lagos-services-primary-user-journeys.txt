@@ -1,0 +1,162 @@
+LAGOS SERVICES — PRIMARY USER JOURNEYS
+=========================================
+
+Purpose
+-------
+This document locks down the primary MVP user journeys.
+These journeys are the UX foundation for the Lagos Services product.
+
+Do not change these flows casually.
+If a change is needed, update this document deliberately before
+changing the product design or implementation.
+
+
+1. SERVICE SEEKER JOURNEY
+-------------------------
+
+Goal:
+A person in Lagos wants to find someone who can provide a service.
+
+Flow:
+
+Homepage
+   ↓
+Search / Browse category
+   ↓
+Services results
+   ↓
+Service detail
+   ↓
+Provider profile
+   ↓
+WhatsApp / Phone contact
+
+
+Key expectations:
+- Users can search for a service.
+- Users can browse service categories.
+- Only approved services are publicly discoverable.
+- A service detail page clearly explains what is offered.
+- Users can see who provides the service.
+- Users can view the provider's profile.
+- Users can see other services offered by the same provider.
+- Users can contact the provider through WhatsApp or phone.
+
+
+2. SERVICE PROVIDER JOURNEY
+---------------------------
+
+Goal:
+A person or business in Lagos wants to offer services through
+Lagos Services.
+
+Flow:
+
+Homepage
+   ↓
+"List your services"
+   ↓
+Create / provide profile information
+   ↓
+Add service
+   ↓
+Submit
+   ↓
+Admin review
+   ↓
+Approved
+   ↓
+Public profile + service
+
+
+Key expectations:
+- A provider has one profile.
+- A profile can contain multiple services.
+- The provider should not need to create a separate identity
+  for every service.
+- A submitted service initially enters a pending state.
+- An administrator reviews the submission.
+- Approved services become publicly discoverable.
+- A provider can add additional services to an existing profile.
+
+
+3. CORE PRODUCT RELATIONSHIP
+----------------------------
+
+The product is based on:
+
+Profile
+   ├── Service 1
+   ├── Service 2
+   └── Service 3
+
+
+A profile represents:
+- A person
+- A service provider
+- Or a business
+
+A service represents:
+- Something that provider offers.
+
+
+Example:
+
+Chinedu Okafor
+   ├── Plumbing
+   ├── Electrical Installation
+   └── Generator Repair
+
+
+IMPORTANT:
+Do not duplicate provider identity information across services.
+
+The public discovery experience is service-focused,
+while the provider identity lives on the profile.
+
+
+4. MVP UX PRINCIPLE
+-------------------
+
+The product should make two things simple:
+
+A. FIND A SERVICE
+   Search → Discover → Evaluate → Contact
+
+B. OFFER A SERVICE
+   Create Profile → Add Service → Submit → Get Approved
+
+
+5. MVP BOUNDARY
+---------------
+
+The primary journeys do NOT currently include:
+
+- Payments
+- Escrow
+- In-app messaging
+- Reviews or ratings
+- Provider subscriptions
+- Provider analytics
+- Automated verification
+- Maps/geolocation
+- Mobile app
+- AI matching
+- Complex notifications
+- Multi-vendor payouts
+
+These remain outside the MVP unless real usage gives us a reason
+to add them.
+
+
+6. DESIGN RULE
+--------------
+
+All future UI/UX decisions should support these journeys.
+
+Before adding a new major screen or feature, ask:
+
+"Which primary user journey does this serve?"
+
+If it does not clearly support one of the journeys above,
+it should not automatically become part of the MVP.

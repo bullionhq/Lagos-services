@@ -1,0 +1,200 @@
+LAGOS SERVICES — ADMIN INTERFACE DESIGN SPEC
+===============================================
+
+STATUS: LOCKED
+PHASE: 0.9 — Design admin interface
+
+PURPOSE
+-------
+Provide a private, functional moderation area for reviewing submitted services.
+The admin interface is intentionally lean: review, approve, reject, edit, and delete.
+
+ADMIN ROUTES
+------------
+/admin
+/admin/pending
+/admin/approved
+/admin/rejected
+
+ADMIN AUTHENTICATION
+--------------------
+- /admin requires authentication.
+- No public admin signup.
+- Unauthenticated visitors must not access admin data or actions.
+- Authorization must be enforced server-side, not only by hiding UI controls.
+
+LOGIN
+-----
+Fields:
+- Email
+- Password
+
+Action:
+- Sign in
+
+Successful authentication redirects to:
+/admin
+
+DASHBOARD
+---------
+Show simple counts:
+- Pending
+- Approved
+- Rejected
+
+Show newest pending submissions.
+
+Each pending item can display:
+- Service title
+- Provider name
+- Location
+- Submission date
+- Review action
+
+Do not add charts, revenue statistics, or unnecessary analytics.
+
+PENDING REVIEW
+--------------
+Show the complete submission:
+- Provider name
+- Provider description
+- Location
+- Service title
+- Category
+- Description
+- Price/rate
+- Phone/WhatsApp
+- Submitted images
+
+Actions:
+- Approve
+- Reject
+- Edit
+- Delete
+
+APPROVAL
+--------
+When approved:
+pending → approved → public
+
+The service becomes publicly available through:
+- Homepage
+- Services/search
+- Category pages
+- Service detail
+- Provider profile
+
+REJECTION
+---------
+Rejecting requires a reason.
+
+Fields/actions:
+- Reason text
+- Cancel
+- Reject Service
+
+Rejected services use status:
+rejected
+
+Rejected services remain private.
+
+EDIT
+----
+Admin may correct obvious issues before approval, such as:
+- Service title typo
+- Incorrect category
+- Description problems
+- Other submitted information requiring correction
+
+After editing, the admin can approve the service.
+
+DELETE
+------
+Deletion requires confirmation.
+
+Prompt:
+"Delete this service?"
+
+Warning:
+"This action cannot be easily undone."
+
+Actions:
+- Cancel
+- Delete
+
+Deleting a service must not accidentally delete the provider profile.
+
+APPROVED
+--------
+/admin/approved
+
+Simple list/table showing:
+- Service
+- Provider
+- Location
+
+Actions:
+- View
+- Edit
+- Delete
+
+REJECTED
+--------
+/admin/rejected
+
+Show:
+- Service
+- Provider
+- Submission date
+- Rejection date
+- Rejection reason
+
+Actions:
+- View
+- Edit
+- Delete
+
+A more advanced restore/re-review workflow is not required for MVP.
+
+MOBILE ADMIN
+------------
+Admin pages must work on phones.
+
+Use stacked cards instead of requiring wide desktop tables.
+
+Review screen should keep primary actions accessible:
+- Approve
+- Reject
+- Edit
+- Delete
+
+SERVICE STATUS MODEL
+--------------------
+PENDING
+  ↓
+APPROVED → PUBLIC
+
+PENDING
+  ↓
+REJECTED → NOT PUBLIC
+
+The status model should map cleanly to the database.
+
+MVP EXCLUSIONS
+--------------
+Do not add:
+- Admin analytics
+- Revenue dashboard
+- Full user management
+- Automated moderation
+- Bulk operations
+- Complex permissions
+- Audit-log UI
+- Email notification system
+- Provider dashboard
+- Admin mobile app
+
+ADMIN PRINCIPLE
+---------------
+The admin's MVP job is:
+Review → approve/reject → maintain listings.

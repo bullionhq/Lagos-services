@@ -1,0 +1,181 @@
+LAGOS SERVICES — LIST YOUR SERVICES FLOW DESIGN SPEC
+======================================================
+
+STATUS: LOCKED
+PHASE: 0.8 — Design "List Your Services" flow
+
+PURPOSE
+-------
+Create a simple mobile-first provider onboarding flow that lets someone submit a profile and service for admin approval.
+
+PRIMARY FLOW
+------------
+List Your Services
+  ↓
+Provider Information
+  ↓
+Service Information
+  ↓
+Contact + Images
+  ↓
+Review
+  ↓
+Submit
+  ↓
+Pending Approval
+
+ACCOUNT REQUIREMENT
+-------------------
+Do not require account creation before the provider starts the submission flow.
+
+STEP 1 — PROVIDER INFORMATION
+-----------------------------
+Heading:
+"Tell us about yourself"
+
+Fields:
+- Full name / Business name — required
+- Short description — required
+- Location — required
+- Profile photo / Business logo — optional
+
+This information creates the Profile.
+
+STEP 2 — SERVICE INFORMATION
+----------------------------
+Heading:
+"What service do you offer?"
+
+Fields:
+- Service title — required
+- Category — required
+- Description — required
+- Price — optional
+- Price unit — optional
+
+Example price units:
+- Per service
+- Per hour
+- Per day
+- Starting from
+- Custom quote
+
+Providers may omit price when the service normally requires a quote.
+
+STEP 3 — CONTACT + IMAGES
+-------------------------
+Contact:
+- Phone number — required
+- WhatsApp number — optional
+- Provide a checkbox for "WhatsApp number is the same as my phone number"
+
+Images:
+- Multiple service images allowed
+- Validate reasonable file types and sizes
+- Preview before submission
+- Allow removing images before submission
+
+STEP 4 — REVIEW
+---------------
+Show the provider exactly what will be submitted/published:
+- Provider name
+- Provider description
+- Location
+- Service title
+- Category
+- Price/rate when supplied
+- Images
+- Service description
+- Contact details as applicable
+
+Primary action:
+"Submit for Approval"
+
+Notice:
+"Your service will be reviewed before it appears publicly."
+
+SUBMISSION SUCCESS
+------------------
+Heading:
+"Service submitted successfully"
+
+Message:
+"Thanks. Your service has been submitted for review. It will appear on Lagos Services after approval."
+
+Actions:
+- Back to Homepage
+- Optional later action: Add Another Service
+
+MULTI-SERVICE MODEL
+-------------------
+One provider profile can have multiple services.
+
+Example:
+Chinedu Okafor
+  - Generator Repair
+  - Generator Installation
+  - Electrical Installation
+
+Do not require the provider to create a separate profile for each service.
+
+For MVP, adding another service can be handled through the submission flow without a provider dashboard.
+
+VALIDATION / ERRORS
+-------------------
+Show clear validation close to the relevant field.
+
+Examples:
+- Please enter your name or business name.
+- Please select a category.
+- Please enter a service description.
+- Please enter a valid phone number.
+- This image couldn't be uploaded. Please try another image.
+
+Do not wipe the entire form because one field or image upload fails.
+
+SUBMISSION STATE
+----------------
+New services enter:
+pending
+
+Pending services are not publicly visible.
+
+Admin later:
+pending → approve → public
+pending → reject → not public
+
+MOBILE-FIRST
+------------
+Present the flow as short guided steps rather than one very large form.
+
+STEP 1:
+Tell us about yourself → Continue
+
+STEP 2:
+What service do you offer? → Continue
+
+STEP 3:
+Contact + images → Continue
+
+STEP 4:
+Review → Submit for Approval
+
+MVP EXCLUSIONS
+--------------
+Do not add:
+- Provider accounts/dashboard
+- Password creation
+- Social login
+- Payments
+- Subscription plans
+- Provider analytics
+- Automatic verification
+- Reviews
+- Availability
+- Booking
+- Complex multi-service management
+- Provider messaging
+
+CORE DATA RULE
+--------------
+One submission creates or updates a Profile and creates a Service attached to that Profile.

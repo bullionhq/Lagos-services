@@ -1,0 +1,140 @@
+LAGOS SERVICES — HOMEPAGE DESIGN SPEC
+======================================
+
+STATUS: LOCKED
+PHASE: 0.4 — Design homepage
+
+PURPOSE
+-------
+The homepage must immediately support the two primary MVP actions:
+1. Find a service.
+2. List a service.
+
+LOCKED STRUCTURE
+----------------
+
+1. HEADER
+   Logo → /
+   Services → /services
+   Categories → /categories
+   List Your Services → /list-your-services
+   Search → service search experience
+
+2. HERO
+   Headline:
+   "Find someone who can get it done."
+
+   Supporting line:
+   "Skilled people. Real services. Lagos."
+
+   Primary interaction:
+   Prominent service search input
+
+   Placeholder:
+   "What service do you need?"
+
+   Helper examples:
+   "Try 'plumber', 'makeup artist', 'generator repair'…"
+
+3. CATEGORIES
+   Heading:
+   "Browse services"
+
+   Display:
+   6–8 initial categories
+
+   Action:
+   "View all categories"
+
+   Example categories:
+   Plumbing
+   Electrical
+   Cleaning
+   Repairs
+   Beauty
+   Photography
+   Catering
+   Construction
+
+   Note:
+   These are examples only. Actual categories will be sourced from Supabase.
+
+4. SERVICE LISTINGS
+   Heading:
+   "Services people are offering"
+
+   Service cards contain:
+   - Image when available
+   - Service title
+   - Provider name
+   - Lagos/location
+   - Price/rate when supplied
+   - View Service action
+
+   Example:
+   Generator Repair & Maintenance
+   Chinedu Okafor
+   Lagos
+   From ₦25,000
+   View Service
+
+   Rule:
+   Discovery remains service-focused while provider identity is clearly visible.
+
+5. PROVIDER CTA
+   Heading:
+   "Have a service to offer?"
+
+   Supporting text:
+   "Put your services in front of people looking for them."
+
+   Primary action:
+   "List Your Services"
+
+6. FOOTER
+   Keep simple and useful.
+
+   Potential links:
+   Lagos Services
+   Services
+   Categories
+   List Your Services
+   About
+   Contact
+   Privacy
+   Terms
+
+MOBILE LAYOUT
+-------------
+1. Logo + menu
+2. Hero
+3. Search
+4. Categories
+5. Service cards
+6. Provider CTA
+7. Footer
+
+MVP BOUNDARIES
+--------------
+Do NOT add:
+- Giant map
+- Reviews/ratings
+- Top-provider rankings
+- Complex filters
+- Pricing marketplace
+- Fake testimonials/statistics
+- Login/signup dominating the header
+- AI recommendations
+- Huge promotional banners
+- Excessive CTAs
+
+DESIGN PRINCIPLES
+-----------------
+- Mobile-first
+- Clear hierarchy
+- Search is the primary user action
+- "List Your Services" is the primary provider CTA
+- Keep the homepage useful without requiring login
+- Use real approved service data when available
+- Do not invent social proof or marketplace statistics
+- Provider profiles are discovered through services, not primary navigation

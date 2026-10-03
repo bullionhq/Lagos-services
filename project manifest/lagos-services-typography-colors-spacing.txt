@@ -1,0 +1,139 @@
+LAGOS SERVICES — 0.11 TYPOGRAPHY, COLORS & SPACING
+STATUS: LOCKED
+
+Purpose
+Define the visual design system for the Lagos Services MVP so the interface is consistent across homepage, discovery, service detail, provider profiles, listing flow, and admin.
+
+BRAND DIRECTION
+Dark, refined, confident, warm, practical.
+
+The interface should feel modern and trustworthy without becoming flashy, overly corporate, overly playful, or gendered. Photography and real service content provide personality; the UI itself remains restrained.
+
+COLOR PALETTE
+
+| Token | Hex | Primary use |
+|---|---|---|
+| Background | #0F0F12 | Main page background |
+| Surface | #1A1A1F | Cards, panels, elevated surfaces |
+| Surface 2 | #242429 | Inputs, secondary surfaces, hover states |
+| Border | #2E2E35 | Borders and dividers |
+| Text Primary | #F5F5F7 | Headings and primary text |
+| Text Secondary | #A1A1AA | Descriptions and metadata |
+| Text Muted | #71717A | Placeholders and disabled content |
+| Accent | #E8B4B8 | Primary interactive elements and selected states |
+| Accent Hover | #F0C9CC | Hover/pressed states |
+| Accent Dark | #C48B8F | Active/secondary accent states and small badges |
+| Success | #4ADE80 | Success confirmations |
+| Warning | #FBBF24 | Warnings and alerts |
+| Error | #F87171 | Errors and destructive states |
+
+Color rules
+- Dark mode is the primary visual direction.
+- Keep most of the interface neutral charcoal/off-white.
+- Use the rose accent sparingly for interaction and emphasis.
+- Do not use the accent as the default color for long-form body text or tiny metadata.
+- Price/rate information should remain readable and primarily neutral unless a specific highlight requires the accent.
+- Borders should remain subtle.
+- Success, warning, and error colors are semantic and should not become decorative brand colors.
+
+TYPOGRAPHY
+
+Primary font: Geist Sans.
+
+Use Geist Sans throughout the MVP UI and body content. A separate display font is not required.
+
+Hierarchy
+- Hero: 36px / 44px mobile; 48px / 56px desktop; weight 700
+- Page title: 28px / 36px mobile; 32px / 40px desktop; weight 600–700
+- Section heading: 20px / 28px; weight 600
+- Card title: 16px / 24px; weight 600
+- Body: 16px / 24px; weight 400
+- Secondary text: 14px / 20px; weight 400
+- Micro labels: 12px / 16px; weight 500
+
+Large headings may use approximately -0.02em letter spacing.
+
+Typography principles
+- Strong hierarchy without excessive font sizes.
+- Body copy should remain highly readable.
+- Avoid unnecessary all-caps text.
+- Use weight and spacing before introducing additional colors.
+- Service titles should remain visually prominent over secondary provider metadata.
+
+SPACING SYSTEM
+
+Base unit: 4px.
+
+Core scale:
+4 / 8 / 12 / 16 / 20 / 24 / 32 / 40 / 48 / 64
+
+Practical rules
+- Mobile page padding: 16px
+- Desktop page padding: 24–32px
+- Card padding: 16–20px
+- Gap between cards: 12–16px
+- Section spacing: 32–48px
+- Button height: 48px
+- Input height: 48px
+- Icon + text gap: 8–12px
+- Mobile bottom page padding: 32–48px, with system safe-area handling where required
+- No bottom navigation in the MVP
+
+SHAPE & COMPONENT FEEL
+
+- Cards: 10–12px radius
+- Inputs: 8–10px radius
+- Buttons: 8–10px radius
+- Avoid excessive pill-shaped controls.
+- Pills are reserved for small tags/badges where useful.
+- Avoid overly soft/bubbly visual treatment.
+
+INTERACTION
+
+Primary button:
+- Accent background
+- Dark readable text where contrast permits
+- Accent hover state
+- 48px minimum height
+
+Secondary button:
+- Neutral surface or transparent background
+- Subtle border
+- Light primary text
+
+Destructive action:
+- Error semantic color
+- Used sparingly and primarily in admin
+
+Focus:
+- Clearly visible focus treatment using the accent/accessible contrast
+- Keyboard navigation must remain visible
+
+Accessibility
+- Maintain readable contrast between text and dark surfaces.
+- Do not rely on color alone to communicate status.
+- Interactive targets should be comfortable on mobile.
+- Long descriptions and metadata should use light neutral text rather than low-contrast accent colors.
+
+IMPLEMENTATION PRINCIPLE
+
+The design system should make the product feel consistent without making every component visually heavy.
+
+Use:
+- neutral surfaces
+- restrained borders
+- clear typography
+- generous but controlled spacing
+- selective rose accents
+- real provider/service imagery
+
+Avoid:
+- gradients as a default visual treatment
+- excessive shadows
+- excessive rounded corners
+- decorative color overload
+- fake social-proof UI
+- unnecessary animation
+
+MVP DECISION
+This visual direction is locked for Phase 0.11. Any later visual changes should be treated as deliberate design-system changes rather than incidental component decisions.

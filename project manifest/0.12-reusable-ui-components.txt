@@ -1,0 +1,411 @@
+0.12 — Reusable UI Components
+=============================
+
+Status: Locked
+
+The key is not to build a huge design system. For the MVP, we want enough reusable pieces to build every locked screen consistently without over-engineering.
+
+
+Component Groups
+----------------
+
+We organize the components into five groups.
+
+
+1. Global / Layout
+These appear throughout the product.
+
+| Component   | Purpose                                      |
+| ----------- | -------------------------------------------- |
+| Header      | Desktop/mobile site navigation               |
+| MobileMenu  | Mobile navigation drawer/menu                |
+| Footer      | Simple site footer                           |
+| Container   | Consistent page width and horizontal padding |
+| PageHeader  | Reusable title + description area            |
+| Section     | Consistent vertical section spacing          |
+| Breadcrumbs | Service/detail navigation                    |
+| BackButton  | Mobile/detail-page navigation                |
+
+Important: Container, Section, and PageHeader should control layout—not individual pages inventing their own spacing.
+
+
+2. Core UI
+These are our basic building blocks.
+
+| Component    | Purpose                                      |
+| ------------ | -------------------------------------------- |
+| Button       | Primary, secondary, ghost, destructive       |
+| IconButton   | Compact icon actions                         |
+| Input        | Text fields                                  |
+| Textarea     | Longer descriptions                          |
+| Select       | Category/location selection                  |
+| Checkbox     | Form options                                 |
+| Label        | Form labels                                  |
+| Badge        | Small status/category labels                 |
+| Card         | General surface container                    |
+| Divider      | Subtle separation                            |
+| EmptyState   | No-results/no-content state                  |
+| LoadingState | Loading content                              |
+| Alert        | Success/warning/error messaging              |
+| Avatar       | Consistent provider/user image with fallback |
+| Dialog       | Base accessible dialog/modal primitive       |
+
+We should keep these components boring and predictable. That's a good thing.
+
+
+3. Lagos Services Components
+These are the components that actually express our product.
+
+SearchBar
+Used on:
+- Homepage
+- Services page
+- potentially category pages
+
+Supports:
+[ 🔍 What service do you need?                 ] [Search]
+
+On mobile it can stack naturally.
+
+CategoryCard
+Used on the homepage and category discovery.
+
+Example:
+┌─────────────────────────┐
+│                         │
+│   🔧                    │
+│   Plumbing              │
+│   Find plumbing services│
+│                         │
+└─────────────────────────┘
+
+The actual category data comes from Supabase—not hardcoded into the component.
+
+ServiceCard
+This is probably the most important reusable component in the product.
+
+Used on:
+- Homepage
+- Search results
+- Category pages
+- Provider profile
+- potentially related services
+
+Structure:
+┌─────────────────────────────┐
+│                             │
+│        Service Image        │
+│                             │
+├─────────────────────────────┤
+│ Plumbing Installation       │
+│ Chinedu Okafor              │
+│ Ikeja, Lagos                │
+│ ₦50,000                     │
+│                             │
+│ View Service →              │
+└─────────────────────────────┘
+
+The component should accept service data rather than knowing anything about a particular provider.
+
+ServiceImage
+A reusable image wrapper for service photos.
+
+Responsibilities:
+- consistent aspect ratio
+- responsive sizing
+- object-fit handling
+- fallback when no image exists
+- graceful broken-image handling
+
+This prevents every page from implementing images differently.
+
+ProviderSummary
+A compact representation of the provider:
+
+[Avatar] Chinedu Okafor
+         Ikeja, Lagos
+
+Used inside ServiceCard and potentially elsewhere.
+
+It should link to:
+/providers/[profile-id]
+
+ContactActions
+Reusable WhatsApp + phone actions.
+
+[ WhatsApp ] [ Call ]
+
+Used primarily on:
+- Service detail
+- Provider profile
+
+The component handles the correct external action without introducing in-app messaging.
+
+ServiceMeta
+Small reusable information row:
+
+Category     Plumbing
+Location     Ikeja, Lagos
+Price        ₦50,000
+
+Useful on service detail and potentially other service surfaces.
+
+
+4. Form Components
+The listing flow needs some specialized pieces.
+
+| Component     | Purpose                                         |
+| ------------- | ----------------------------------------------- |
+| FormField     | Label + control + validation                    |
+| FormSection   | Groups related fields                           |
+| ImageUploader | Upload/preview/remove service images            |
+| ImagePreview  | Individual uploaded image                       |
+| FormProgress  | Multi-step listing progress                     |
+| ReviewSection | Shows submitted information before confirmation |
+| SubmitState   | Submission/loading/success state                |
+
+The important principle:
+The form components should know how to display and validate UI, but not contain business logic for creating profiles/services.
+That logic belongs elsewhere.
+
+
+5. Admin Components
+We don't need a separate admin design system.
+Reuse the same core components, with a few admin-specific pieces:
+
+| Component      | Purpose                          |
+| -------------- | -------------------------------- |
+| AdminHeader    | Admin navigation/context         |
+| StatusBadge    | Pending / Approved / Rejected    |
+| SubmissionCard | Pending submission summary       |
+| ReviewPanel    | Full submission review           |
+| AdminActions   | Approve / Reject / Edit / Delete |
+| RejectDialog   | Required rejection reason        |
+| ConfirmDialog  | Destructive action confirmation  |
+| AdminStats     | Pending/approved/rejected counts |
+
+This keeps admin visually connected to the public product.
+
+
+Component Hierarchy
+-------------------
+
+This is the important architectural part.
+
+We should think of it like this:
+
+Design Tokens
+    ↓
+Primitive UI
+    ↓
+Shared Layout
+    ↓
+Lagos Services Components
+    ↓
+Pages
+
+For example:
+
+Button
+  ↓
+ContactActions
+  ↓
+ServiceDetail
+
+And:
+
+Card
+  ↓
+ServiceCard
+  ↓
+Homepage
+Services Page
+Provider Profile
+Category Page
+
+This means we don't build four slightly different service cards.
+One ServiceCard, reused everywhere.
+
+
+Proposed Component Structure
+----------------------------
+
+When we eventually code, we'd use something along these lines:
+
+components/
+├── ui/
+│   ├── button.tsx
+│   ├── icon-button.tsx
+│   ├── input.tsx
+│   ├── textarea.tsx
+│   ├── select.tsx
+│   ├── checkbox.tsx
+│   ├── label.tsx
+│   ├── badge.tsx
+│   ├── card.tsx
+│   ├── alert.tsx
+│   ├── divider.tsx
+│   ├── empty-state.tsx
+│   ├── loading-state.tsx
+│   ├── avatar.tsx
+│   └── dialog.tsx
+│
+├── layout/
+│   ├── header.tsx
+│   ├── mobile-menu.tsx
+│   ├── footer.tsx
+│   ├── container.tsx
+│   ├── section.tsx
+│   ├── page-header.tsx
+│   ├── breadcrumbs.tsx
+│   └── back-button.tsx
+│
+├── services/
+│   ├── search-bar.tsx
+│   ├── category-card.tsx
+│   ├── service-card.tsx
+│   ├── service-image.tsx
+│   ├── service-meta.tsx
+│   └── contact-actions.tsx
+│
+├── providers/
+│   └── provider-summary.tsx
+│
+├── forms/
+│   ├── form-field.tsx
+│   ├── form-section.tsx
+│   ├── image-uploader.tsx
+│   ├── image-preview.tsx
+│   ├── form-progress.tsx
+│   ├── review-section.tsx
+│   └── submit-state.tsx
+│
+└── admin/
+    ├── admin-header.tsx
+    ├── status-badge.tsx
+    ├── submission-card.tsx
+    ├── review-panel.tsx
+    ├── admin-actions.tsx
+    ├── reject-dialog.tsx
+    ├── confirm-dialog.tsx
+    └── admin-stats.tsx
+
+We don't have to create every file immediately. This is the target organization.
+
+
+What We Deliberately Do NOT Make Into Components Yet
+----------------------------------------------------
+
+We don't need:
+- PremiumButton
+- FeaturedServiceCard
+- TopProviderCard
+- RecommendedServiceCard
+- VerifiedProviderCard
+- TrendingServiceCard
+- PricingCard
+- TestimonialCard
+- StatsCard
+- AnimatedHero
+- SmartSearch
+- AIRecommendationCard
+
+Those either aren't part of the MVP or create unnecessary abstractions.
+
+
+Component Rules
+---------------
+
+Rule 1 — Reuse before duplicating
+If two screens need essentially the same UI, create one component.
+
+Rule 2 — Components receive data
+For example:
+ServiceCard(service)
+not:
+ServiceCard() → fetches its own service
+
+Pages/data layers handle fetching.
+
+Rule 3 — Components don't own business logic
+A button can display "Approve."
+It shouldn't secretly know how to approve a service in Supabase.
+
+Rule 4 — Keep components composable
+For example:
+Card
+  + ServiceImage
+  + ProviderSummary
+  + ServiceMeta
+  + Button
+rather than creating one enormous component that does everything.
+
+Rule 5 — Mobile-first
+Every component starts with the mobile layout and expands for desktop.
+
+Rule 6 — Accessibility is part of the component
+Buttons, inputs, dialogs, focus states, labels, keyboard interaction and touch targets should be handled at the component level.
+
+Rule 7 — Variants over new components
+Prefer variant="primary" | "secondary" | "ghost" | "destructive" and size="sm" | "md" | "lg" on existing components rather than creating PremiumButton, FeaturedServiceCard, etc.
+
+
+Final Locked Component List
+---------------------------
+
+Global / Layout
+- Header
+- MobileMenu
+- Footer
+- Container
+- Section
+- PageHeader
+- Breadcrumbs
+- BackButton
+
+Core UI
+- Button
+- IconButton
+- Input
+- Textarea
+- Select
+- Checkbox
+- Label
+- Badge
+- Card
+- Divider
+- EmptyState
+- LoadingState
+- Alert
+- Avatar
+- Dialog
+
+Services
+- SearchBar
+- CategoryCard
+- ServiceCard
+- ServiceImage
+- ServiceMeta
+- ContactActions
+
+Providers
+- ProviderSummary
+
+Forms
+- FormField
+- FormSection
+- ImageUploader
+- ImagePreview
+- FormProgress
+- ReviewSection
+- SubmitState
+
+Admin
+- AdminHeader
+- StatusBadge
+- SubmissionCard
+- ReviewPanel
+- AdminActions
+- RejectDialog
+- ConfirmDialog
+- AdminStats

@@ -1,0 +1,158 @@
+LAGOS SERVICES — MOBILE LAYOUTS DESIGN SPEC
+===============================================
+
+STATUS: LOCKED
+PHASE: 0.10 — Define mobile layouts
+
+APPROACH
+--------
+Mobile-first.
+Desktop expands the mobile information architecture rather than becoming a separate product.
+
+GLOBAL MOBILE SHELL
+-------------------
+Header:
+- Logo
+- Menu button
+
+Menu:
+- Services
+- Categories
+- List Your Services
+
+No persistent bottom navigation for MVP.
+
+HOMEPAGE
+--------
+Order:
+1. Header
+2. Hero
+3. Search
+4. Browse services/categories
+5. Service cards
+6. Provider CTA
+7. Footer
+
+Rules:
+- Search and service discovery come before promotional content.
+- Service cards stack vertically.
+
+SERVICES / SEARCH
+-----------------
+Order:
+1. Header
+2. Find a service
+3. Search field
+4. Compact Category filter
+5. Compact Location filter
+6. Results count
+7. Stacked service cards
+
+Filters must remain compact.
+
+SERVICE DETAIL
+--------------
+Order:
+1. Back/breadcrumb
+2. Service title
+3. Provider
+4. Location
+5. Price
+6. WhatsApp / Call
+7. Image
+8. About this service
+9. Service information
+10. Provider section
+11. Other services
+
+Contact actions remain highly visible.
+
+PROVIDER PROFILE
+----------------
+Order:
+1. Back
+2. Profile image/logo
+3. Provider name
+4. Provider descriptor
+5. Location
+6. Bio
+7. WhatsApp / Call
+8. Services offered
+9. Service cards
+
+The service list remains the primary content.
+
+LIST YOUR SERVICES
+------------------
+Use a guided multi-step mobile form instead of one large form.
+
+Steps:
+1. Provider information
+2. Service information
+3. Contact + images
+4. Review
+5. Submit
+
+Show progress, e.g.:
+"Step 2 of 4"
+
+Use comfortable form fields and clear Continue actions.
+
+ADMIN MOBILE
+------------
+Use stacked cards instead of wide desktop tables.
+
+Dashboard:
+- Pending count
+- Approved count
+- Rejected count
+- Pending service cards
+
+Review:
+- Full service/provider information
+- Images
+- Approve
+- Reject
+- Edit
+- Delete
+
+No horizontal scrolling tables.
+
+MOBILE SPACING DIRECTION
+------------------------
+Initial design direction:
+- Page horizontal padding: 16px
+- Major section spacing: 32–48px
+- Card padding: 16px
+- Form field spacing: 16px
+- Button height: approximately 48px
+- Comfortable tap targets
+
+Exact values are finalized in Phase 0.11.
+
+IMAGES
+------
+- Responsive
+- Consistent card aspect ratios
+- Appropriate cropping
+- Neutral fallback when absent
+- No oversized mobile galleries
+
+RESPONSIVE PRINCIPLE
+--------------------
+Mobile uses a single-column layout.
+Desktop may introduce grids and side-by-side content where useful, while preserving the same information architecture, hierarchy, and primary actions.
+
+LOCKED MOBILE RULES
+-------------------
+- Mobile-first
+- No bottom navigation
+- No giant desktop-style tables
+- No tiny controls
+- No horizontal scrolling
+- Search remains prominent
+- Contact actions remain prominent
+- Forms use manageable steps
+- Cards stack naturally
+- Provider services remain easy to scan
+- Admin actions remain accessible

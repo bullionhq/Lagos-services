@@ -1,0 +1,1533 @@
+LAGOS SERVICES — MVP UI DESIGN SPEC
+=====================================
+
+STATUS: LOCKED
+PHASE: 0.13 — Review and freeze MVP design direction
+
+This document is the single source of truth for the Lagos Services MVP UI.
+It consolidates and freezes decisions from Phase 0.1 through 0.12.
+
+Do not change these decisions casually.
+Any future change must be deliberate and recorded.
+
+
+────────────────────────────────────────
+0.1 PRIMARY USER JOURNEYS
+────────────────────────────────────────
+
+1. SERVICE SEEKER JOURNEY
+
+Goal:
+A person in Lagos wants to find someone who can provide a service.
+
+Flow:
+Homepage
+  → Search / Browse category
+  → Services results
+  → Service detail
+  → Provider profile
+  → WhatsApp / Phone contact
+
+Key expectations:
+- Users can search for a service.
+- Users can browse service categories.
+- Only approved services are publicly discoverable.
+- A service detail page clearly explains what is offered.
+- Users can see who provides the service.
+- Users can view the provider's profile.
+- Users can see other services offered by the same provider.
+- Users can contact the provider through WhatsApp or phone.
+
+2. SERVICE PROVIDER JOURNEY
+
+Goal:
+A person or business in Lagos wants to offer services through Lagos Services.
+
+Flow:
+Homepage
+  → "List your services"
+  → Create / provide profile information
+  → Add service
+  → Submit
+  → Admin review
+  → Approved
+  → Public profile + service
+
+Key expectations:
+- A provider has one profile.
+- A profile can contain multiple services.
+- The provider should not need to create a separate identity for every service.
+- A submitted service initially enters a pending state.
+- An administrator reviews the submission.
+- Approved services become publicly discoverable.
+- A provider can add additional services by going through the submission flow again (no provider dashboard in MVP).
+
+3. CORE PRODUCT RELATIONSHIP
+
+Profile
+  ├── Service 1
+  ├── Service 2
+  └── Service 3
+
+A profile represents a person, service provider, or business.
+A service represents something that provider offers.
+
+Important:
+Do not duplicate provider identity information across services.
+The public discovery experience is service-focused.
+Provider identity lives on the profile.
+
+4. MVP UX PRINCIPLE
+
+The product should make two things simple:
+
+A. FIND A SERVICE
+   Search → Discover → Evaluate → Contact
+
+B. OFFER A SERVICE
+   Create Profile → Add Service → Submit → Get Approved
+
+5. MVP BOUNDARY
+
+The primary journeys do NOT include:
+- Payments
+- Escrow
+- In-app messaging
+- Reviews or ratings
+- Provider subscriptions
+- Provider analytics
+- Automated verification
+- Maps / geolocation
+- Mobile app
+- AI matching
+- Complex notifications
+- Multi-vendor payouts
+
+6. DESIGN RULE
+
+All future UI/UX decisions must support these journeys.
+Before adding a new major screen or feature, ask:
+"Which primary user journey does this serve?"
+If it does not clearly support one of the journeys above, it should not become part of the MVP.
+
+
+────────────────────────────────────────
+0.2 SITE STRUCTURE
+────────────────────────────────────────
+
+PUBLIC SITE
+
+/                           Home
+/services                   Service search and discovery
+/services/[service-id]      Individual service detail
+/categories                 Category directory
+/categories/[category-slug] Category results
+/providers/[profile-id]     Provider profile
+/list-your-services         Provider submission flow
+
+ADMIN SITE
+
+/admin                      Admin dashboard
+/admin/pending              Pending submissions
+/admin/approved             Approved services
+/admin/rejected             Rejected services
+
+PUBLIC NAVIGATION PRINCIPLE
+
+Main navigation is service-focused:
+- Services
+- Categories
+- List Your Services
+
+Provider profiles are not a primary navigation item.
+Users reach them through a service:
+Search / Browse → Service → Provider Profile → Other Services
+
+CORE PUBLIC FLOW
+
+Homepage
+  → Search / Browse Category
+  → Services Results
+  → Service Detail
+  → Provider Profile
+  → WhatsApp / Phone
+
+URL PRINCIPLES
+
+Services:    /services/[service-id]
+Categories:  /categories/[category-slug]
+Providers:   /providers/[profile-id]
+Submission:  /list-your-services
+Admin:       /admin/...
+
+MVP BOUNDARY
+
+Do not add additional major public sections unless they clearly support one of the locked primary user journeys.
+
+
+────────────────────────────────────────
+0.3 NAVIGATION
+────────────────────────────────────────
+
+1. DESKTOP HEADER
+
+Logo → /
+Services → /services
+Categories → /categories
+List Your Services → /list-your-services
+Search → service search experience
+
+Principles:
+- Keep the header simple.
+- Make service discovery prominent.
+- Make "List Your Services" the primary provider CTA.
+
+2. MOBILE HEADER
+
+Logo
+Menu button
+
+When opened:
+- Services
+- Categories
+- List Your Services
+
+Search remains prominent on the homepage and services/discovery experience rather than being buried in the menu.
+
+3. SEARCH
+
+Search is a primary product action.
+The homepage should prominently present a service search field.
+Search should also be readily available on the services/discovery page.
+
+The same SearchBar component is used on:
+- Homepage
+- Services page
+- Category results (where relevant)
+
+4. PROVIDER NAVIGATION
+
+There is no "Providers" item in the primary navigation.
+
+Intended discovery path:
+Need → Service → Provider → Other services from that provider
+
+5. FOOTER
+
+Possible links:
+- Lagos Services
+- Services
+- Categories
+- List Your Services
+- About
+- Contact
+- Privacy
+- Terms
+
+Secondary pages (About, Contact, Privacy, Terms) are not required for initial implementation.
+
+6. PRIMARY ACTIONS
+
+For service seekers:
+- Search for a service
+- Browse categories
+- Open a service
+- Contact provider
+
+For providers:
+- List Your Services
+
+7. NAVIGATION RULE
+
+Do not add navigation items merely because a page exists.
+Every primary navigation item must support one of the locked primary user journeys.
+
+
+────────────────────────────────────────
+0.4 HOMEPAGE
+────────────────────────────────────────
+
+PURPOSE
+
+Immediately support the two primary MVP actions:
+1. Find a service.
+2. List a service.
+
+LOCKED STRUCTURE
+
+1. HEADER
+   Logo → /
+   Services → /services
+   Categories → /categories
+   List Your Services → /list-your-services
+
+2. HERO
+   Headline: "Find someone who can get it done."
+   Supporting line: "Skilled people. Real services. Lagos."
+   Primary interaction: Prominent service search input
+   Placeholder: "What service do you need?"
+   Helper examples: "Try 'plumber', 'makeup artist', 'generator repair'…"
+
+3. CATEGORIES
+   Heading: "Browse services"
+   Display: 6–8 initial categories
+   Action: "View all categories"
+   Note: Actual categories come from Supabase. Examples only: Plumbing, Electrical, Cleaning, Repairs, Beauty, Photography, Catering, Construction.
+
+4. SERVICE LISTINGS
+   Heading: "Services people are offering"
+   Service cards contain:
+   - Image when available
+   - Service title
+   - Provider name
+   - Location
+   - Price/rate when supplied
+   - View Service action
+   Rule: Discovery remains service-focused while provider identity is clearly visible.
+
+5. PROVIDER CTA
+   Heading: "Have a service to offer?"
+   Supporting text: "Put your services in front of people looking for them."
+   Primary action: "List Your Services"
+
+6. FOOTER
+   Keep simple and useful.
+
+MOBILE ORDER
+
+1. Logo + menu
+2. Hero
+3. Search
+4. Categories
+5. Service cards
+6. Provider CTA
+7. Footer
+
+MVP BOUNDARIES
+
+Do NOT add:
+- Giant map
+- Reviews / ratings
+- Top-provider rankings
+- Complex filters
+- Pricing marketplace
+- Fake testimonials / statistics
+- Login / signup dominating the header
+- AI recommendations
+- Huge promotional banners
+- Excessive CTAs
+
+
+────────────────────────────────────────
+0.5 SERVICES / SEARCH
+────────────────────────────────────────
+
+PURPOSE
+
+The main public discovery screen.
+Primary question: "Can I find the service I need?"
+
+STRUCTURE
+
+1. Header
+2. Page title ("Find a service")
+3. Search bar
+4. Category filter
+5. Location filter
+6. Results summary
+7. Service cards
+8. Pagination / Load more
+
+SEARCH
+
+Placeholder: "Search for a service..."
+Example searches: plumber, generator repair, makeup artist, photographer
+
+The same SearchBar component used on the homepage is used here.
+
+FILTERS
+
+Keep MVP filtering simple.
+Category: All categories + actual categories from Supabase
+Location: All Lagos + locations represented by actual service data
+
+Do not add maps, radius sliders, distance calculations, or complex filter systems.
+
+RESULTS
+
+Show a results summary such as: "24 services found"
+
+Service cards contain:
+- Service image (when available)
+- Service title
+- Provider name
+- Location
+- Price/rate (when supplied)
+- View Service action
+
+SERVICE-FIRST RULE
+
+The service title is the visual priority.
+Provider identity is visible but secondary.
+A provider may have multiple services.
+Each service is independently searchable and links back to the same provider profile.
+
+SEARCH BEHAVIOR
+
+Search should match relevant service information, especially:
+- Service title
+- Description
+- Category
+- Location
+
+Only approved services are publicly searchable.
+
+EMPTY STATE
+
+Heading: "No services found"
+Supporting text: "We couldn't find a service matching your search. Try a different search or browse our categories."
+Action: "Browse Categories"
+
+MOBILE ORDER
+
+1. Header
+2. Find a service
+3. Search
+4. Compact Category and Location filters
+5. Results summary
+6. Service cards
+
+Filters must remain compact and must not dominate the screen.
+
+INTENTIONALLY OUT OF MVP
+
+- Ratings / reviews
+- Provider rankings
+- "Best provider" labels
+- Distance sorting
+- Maps
+- Availability calendars
+- Advanced price filters
+- AI recommendations
+- Sponsored results
+- Complex sorting systems
+
+
+────────────────────────────────────────
+0.6 SERVICE DETAIL
+────────────────────────────────────────
+
+PURPOSE
+
+Give a service seeker enough useful information to decide whether to contact the provider.
+
+PRIMARY FLOW
+
+Discovery → Service Detail → Confidence → Contact
+
+URL
+
+/services/[service-id]
+
+STRUCTURE
+
+1. Header
+2. Breadcrumb / Back
+3. Service title
+4. Provider identity
+5. Location
+6. Price/rate
+7. Contact actions (WhatsApp + Call)
+8. Images
+9. Description ("About this service")
+10. Service information (Category, Location, Price, Price unit)
+11. Provider section ("About [Provider Name]")
+12. Other provider services
+
+TOP SECTION EXAMPLE
+
+Generator Repair & Maintenance
+Chinedu Okafor
+Lagos
+From ₦25,000
+
+Primary contact actions: WhatsApp | Call
+Contact actions must be prominent.
+
+IMAGES
+
+If provider-submitted images exist:
+- Show a primary image
+- Allow additional images
+- Keep the gallery lightweight
+
+If no images exist:
+- Use a clean neutral fallback
+- Do not fabricate provider content
+
+DESCRIPTION
+
+Heading: "About this service"
+Display the submitted service description without unnecessary truncation.
+
+SERVICE INFORMATION
+
+Show available fields only:
+- Category
+- Location
+- Price
+- Price unit
+
+PROVIDER SECTION
+
+Heading: "About [Provider Name]"
+Show: Provider name, Provider bio, View Profile action
+Provider profile URL: /providers/[profile-id]
+
+CONTACT BEHAVIOR
+
+WhatsApp:
+- Opens a WhatsApp conversation using the provider's WhatsApp number.
+- Initial message may identify the service.
+
+Call:
+- Opens the device phone dialer using the provider's phone number.
+
+No in-app messaging.
+
+NOT-FOUND / UNAVAILABLE
+
+If the service does not exist or is no longer publicly available:
+- Show "Service not found"
+- Provide "Browse Services"
+- Do not expose admin/internal information
+
+MOBILE ORDER
+
+1. Back / breadcrumb
+2. Service title
+3. Provider
+4. Location
+5. Price
+6. WhatsApp / Call
+7. Image
+8. About this service
+9. Service information
+10. Provider section
+11. Other services
+
+MVP EXCLUSIONS
+
+Do not add:
+- Reviews
+- Ratings
+- Favorites / saves
+- Booking calendar
+- Online payments
+- Escrow
+- In-app chat
+- Provider verification badges
+- Provider ranking labels
+- Complex recommendations
+
+
+────────────────────────────────────────
+0.7 PROVIDER PROFILE
+────────────────────────────────────────
+
+PURPOSE
+
+Represent the person, professional, or business behind the services.
+
+CORE MODEL
+
+One profile → multiple services.
+The profile builds context around the provider and provides access to all of that provider's approved public services.
+
+URL
+
+/providers/[profile-id]
+
+STRUCTURE
+
+1. Header
+2. Provider identity
+   - Name
+   - Profile image / logo (optional)
+   - Location
+   - Bio
+3. Contact actions (WhatsApp + Call)
+4. Services offered
+5. Back / browse services
+
+PROVIDER IDENTITY EXAMPLE
+
+Chinedu Okafor
+Generator & Electrical Services
+Ikeja, Lagos
+
+Bio: A short provider-written description.
+Profile image/logo: Optional. If absent, use a clean neutral fallback. Do not fabricate provider imagery.
+
+CONTACT
+
+Place WhatsApp and Call actions near the provider identity.
+
+SERVICES OFFERED
+
+This is the most important section.
+Heading: "Services offered"
+Each service card can show:
+- Service title
+- Price/rate when supplied
+- Location
+- View Service action
+
+Each card links to /services/[service-id]
+Only approved/public services belonging to the profile appear.
+
+NAVIGATION RELATIONSHIP
+
+Service → Provider Profile → Other Services → Service Detail
+
+Provider information is not duplicated unnecessarily across service records.
+
+MOBILE ORDER
+
+1. Back
+2. Profile image / logo
+3. Provider name
+4. Provider category / descriptor
+5. Location
+6. Bio
+7. WhatsApp / Call
+8. Services offered
+9. Service cards
+
+EMPTY STATE
+
+A public provider profile should normally have at least one approved service.
+If an edge case occurs:
+Heading: "No services available"
+Supporting text: "This provider currently has no public services."
+Action: "Browse Services"
+
+MVP EXCLUSIONS
+
+Do not add:
+- Ratings
+- Reviews
+- Followers
+- Likes
+- Jobs completed counters
+- "Top provider" labels
+- Verification badges
+- Response-rate statistics
+- Provider rankings
+- Provider earnings
+- Analytics
+- Availability calendars
+- Complex portfolio systems
+
+DESIGN PRINCIPLE
+
+The provider profile is not a social-media-style profile.
+Its primary purpose is: Provider identity → services → contact
+
+SEO
+
+Meaningful provider title, for example:
+"Chinedu Okafor — Generator & Electrical Services | Lagos Services"
+
+
+────────────────────────────────────────
+0.8 LIST YOUR SERVICES
+────────────────────────────────────────
+
+PURPOSE
+
+Create a simple mobile-first provider onboarding flow that lets someone submit a profile and service for admin approval.
+
+PRIMARY FLOW
+
+List Your Services
+  → Provider Information
+  → Service Information
+  → Contact + Images
+  → Review
+  → Submit
+  → Pending Approval
+
+ACCOUNT REQUIREMENT
+
+Do not require account creation before the provider starts the submission flow.
+
+STEP 1 — PROVIDER INFORMATION
+
+Heading: "Tell us about yourself"
+Fields:
+- Full name / Business name — required
+- Short description — required
+- Location — required
+- Profile photo / Business logo — optional
+
+This information creates the Profile.
+
+STEP 2 — SERVICE INFORMATION
+
+Heading: "What service do you offer?"
+Fields:
+- Service title — required
+- Category — required
+- Description — required
+- Price — optional
+- Price unit — optional
+
+Example price units:
+- Per service
+- Per hour
+- Per day
+- Starting from
+- Custom quote
+
+Providers may omit price when the service normally requires a quote.
+
+STEP 3 — CONTACT + IMAGES
+
+Contact:
+- Phone number — required
+- WhatsApp number — optional
+- Checkbox: "WhatsApp number is the same as my phone number"
+
+Images:
+- Multiple service images allowed
+- Validate reasonable file types and sizes
+- Preview before submission
+- Allow removing images before submission
+
+STEP 4 — REVIEW
+
+Show the provider exactly what will be submitted:
+- Provider name
+- Provider description
+- Location
+- Service title
+- Category
+- Price/rate when supplied
+- Images
+- Service description
+- Contact details
+
+Primary action: "Submit for Approval"
+Notice: "Your service will be reviewed before it appears publicly."
+
+SUBMISSION SUCCESS
+
+Heading: "Service submitted successfully"
+Message: "Thanks. Your service has been submitted for review. It will appear on Lagos Services after approval."
+Actions:
+- Back to Homepage
+- Optional later: Add Another Service (re-uses the same flow)
+
+MULTI-SERVICE MODEL
+
+One provider profile can have multiple services.
+Do not require the provider to create a separate profile for each service.
+For MVP, adding another service is handled by going through the submission flow again (no provider dashboard).
+
+VALIDATION / ERRORS
+
+Show clear validation close to the relevant field.
+Do not wipe the entire form because one field or image upload fails.
+
+SUBMISSION STATE
+
+New services enter: pending
+Pending services are not publicly visible.
+Admin later: pending → approve → public | pending → reject → not public
+
+MOBILE-FIRST
+
+Present the flow as short guided steps rather than one very large form.
+Show progress (e.g. "Step 2 of 4").
+
+MVP EXCLUSIONS
+
+Do not add:
+- Provider accounts / dashboard
+- Password creation
+- Social login
+- Payments
+- Subscription plans
+- Provider analytics
+- Automatic verification
+- Reviews
+- Availability
+- Booking
+- Complex multi-service management
+- Provider messaging
+
+CORE DATA RULE
+
+One submission creates or updates a Profile and creates a Service attached to that Profile.
+
+
+────────────────────────────────────────
+0.9 ADMIN INTERFACE
+────────────────────────────────────────
+
+PURPOSE
+
+Provide a private, functional moderation area for reviewing submitted services.
+The admin interface is intentionally lean: review, approve, reject, edit, and delete.
+
+ADMIN ROUTES
+
+/admin
+/admin/pending
+/admin/approved
+/admin/rejected
+
+ADMIN AUTHENTICATION
+
+- /admin requires authentication.
+- No public admin signup.
+- Unauthenticated visitors must not access admin data or actions.
+- Authorization must be enforced server-side, not only by hiding UI controls.
+
+LOGIN
+
+Fields: Email, Password
+Action: Sign in
+Successful authentication redirects to /admin
+
+DASHBOARD
+
+Show simple counts:
+- Pending
+- Approved
+- Rejected
+
+Show newest pending submissions.
+Each pending item can display:
+- Service title
+- Provider name
+- Location
+- Submission date
+- Review action
+
+Do not add charts, revenue statistics, or unnecessary analytics.
+
+PENDING REVIEW
+
+Show the complete submission:
+- Provider name
+- Provider description
+- Location
+- Service title
+- Category
+- Description
+- Price/rate
+- Phone / WhatsApp
+- Submitted images
+
+Actions: Approve | Reject | Edit | Delete
+
+APPROVAL
+
+When approved: pending → approved → public
+The service becomes publicly available through homepage, services/search, category pages, service detail, and provider profile.
+
+REJECTION
+
+Rejecting requires a reason.
+Fields/actions: Reason text | Cancel | Reject Service
+Rejected services remain private (status: rejected).
+
+EDIT
+
+Admin may correct obvious issues before approval (title typo, incorrect category, description problems, etc.).
+After editing, the admin can approve the service.
+
+DELETE
+
+Deletion requires confirmation.
+Prompt: "Delete this service?"
+Warning: "This action cannot be easily undone."
+Actions: Cancel | Delete
+Deleting a service must not accidentally delete the provider profile.
+
+APPROVED
+
+/admin/approved
+Simple list showing: Service, Provider, Location
+Actions: View | Edit | Delete
+
+REJECTED
+
+/admin/rejected
+Show: Service, Provider, Submission date, Rejection date, Rejection reason
+Actions: View | Edit | Delete
+A more advanced restore/re-review workflow is not required for MVP.
+
+MOBILE ADMIN
+
+Admin pages must work on phones.
+Use stacked cards instead of requiring wide desktop tables.
+Review screen should keep primary actions accessible: Approve | Reject | Edit | Delete
+
+SERVICE STATUS MODEL
+
+PENDING
+  ↓
+APPROVED → PUBLIC
+
+PENDING
+  ↓
+REJECTED → NOT PUBLIC
+
+MVP EXCLUSIONS
+
+Do not add:
+- Admin analytics
+- Revenue dashboard
+- Full user management
+- Automated moderation
+- Bulk operations
+- Complex permissions
+- Audit-log UI
+- Email notification system
+- Provider dashboard
+- Admin mobile app
+
+ADMIN PRINCIPLE
+
+The admin's MVP job is: Review → approve/reject → maintain listings.
+
+
+────────────────────────────────────────
+0.10 MOBILE LAYOUTS
+────────────────────────────────────────
+
+APPROACH
+
+Mobile-first.
+Desktop expands the mobile information architecture rather than becoming a separate product.
+
+GLOBAL MOBILE SHELL
+
+Header: Logo + Menu button
+Menu: Services | Categories | List Your Services
+No persistent bottom navigation for MVP.
+
+HOMEPAGE ORDER
+
+1. Header
+2. Hero
+3. Search
+4. Browse services / categories
+5. Service cards
+6. Provider CTA
+7. Footer
+
+SERVICES / SEARCH ORDER
+
+1. Header
+2. Find a service
+3. Search field
+4. Compact Category filter
+5. Compact Location filter
+6. Results count
+7. Stacked service cards
+
+SERVICE DETAIL ORDER
+
+1. Back / breadcrumb
+2. Service title
+3. Provider
+4. Location
+5. Price
+6. WhatsApp / Call
+7. Image
+8. About this service
+9. Service information
+10. Provider section
+11. Other services
+
+PROVIDER PROFILE ORDER
+
+1. Back
+2. Profile image / logo
+3. Provider name
+4. Provider descriptor
+5. Location
+6. Bio
+7. WhatsApp / Call
+8. Services offered
+9. Service cards
+
+LIST YOUR SERVICES
+
+Use a guided multi-step mobile form.
+Steps: 1. Provider information → 2. Service information → 3. Contact + images → 4. Review → 5. Submit
+Show progress (e.g. "Step 2 of 4").
+
+ADMIN MOBILE
+
+Use stacked cards instead of wide desktop tables.
+Dashboard: Pending count, Approved count, Rejected count, Pending service cards
+Review: Full information + Approve | Reject | Edit | Delete
+No horizontal scrolling tables.
+
+MOBILE SPACING DIRECTION
+
+- Page horizontal padding: 16px
+- Major section spacing: 32–48px
+- Card padding: 16px
+- Form field spacing: 16px
+- Button height: approximately 48px
+- Comfortable tap targets
+
+Exact values are defined in 0.11.
+
+IMAGES
+
+- Responsive
+- Consistent card aspect ratios
+- Appropriate cropping
+- Neutral fallback when absent
+- No oversized mobile galleries
+
+RESPONSIVE PRINCIPLE
+
+Mobile uses a single-column layout.
+Desktop may introduce grids and side-by-side content where useful, while preserving the same information architecture, hierarchy, and primary actions.
+
+LOCKED MOBILE RULES
+
+- Mobile-first
+- No bottom navigation
+- No giant desktop-style tables
+- No tiny controls
+- No horizontal scrolling
+- Search remains prominent
+- Contact actions remain prominent
+- Forms use manageable steps
+- Cards stack naturally
+- Provider services remain easy to scan
+- Admin actions remain accessible
+
+
+────────────────────────────────────────
+0.11 TYPOGRAPHY, COLORS & SPACING
+────────────────────────────────────────
+
+BRAND DIRECTION
+
+Dark, refined, confident, warm, practical.
+The interface should feel modern and trustworthy without becoming flashy, overly corporate, overly playful, or gendered.
+Photography and real service content provide personality; the UI itself remains restrained.
+
+COLOR PALETTE
+
+| Token          | Hex       | Primary use                                      |
+|----------------|-----------|--------------------------------------------------|
+| Background     | #0F0F12   | Main page background                             |
+| Surface        | #1A1A1F   | Cards, panels, elevated surfaces                 |
+| Surface 2      | #242429   | Inputs, secondary surfaces, hover states         |
+| Border         | #2E2E35   | Borders and dividers                             |
+| Text Primary   | #F5F5F7   | Headings and primary text                        |
+| Text Secondary | #A1A1AA   | Descriptions and metadata                        |
+| Text Muted     | #71717A   | Placeholders and disabled content                |
+| Accent         | #E8B4B8   | Primary interactive elements and selected states |
+| Accent Hover   | #F0C9CC   | Hover / pressed states                           |
+| Accent Dark    | #C48B8F   | Active / secondary accent states and small badges|
+| Success        | #4ADE80   | Success confirmations                            |
+| Warning        | #FBBF24   | Warnings and alerts                              |
+| Error          | #F87171   | Errors and destructive states                    |
+
+COLOR RULES
+
+- Dark mode is the primary visual direction.
+- Keep most of the interface neutral charcoal / off-white.
+- Use the rose accent sparingly for interaction and emphasis.
+- Do not use the accent as the default color for long-form body text or tiny metadata.
+- Price / rate information should remain readable and primarily neutral unless a specific highlight requires the accent.
+- Borders should remain subtle.
+- Success, warning, and error colors are semantic and should not become decorative brand colors.
+
+PRIMARY BUTTON CONTRAST
+
+Primary buttons use Accent background (#E8B4B8).
+Button text must use a near-black / deep charcoal color for strong contrast (not pure white).
+This ensures readability on the soft rose background.
+
+TYPOGRAPHY
+
+Primary font: Geist Sans
+Use Geist Sans throughout the MVP UI and body content.
+A separate display font is not required.
+
+Hierarchy:
+- Hero: 36px / 44px mobile; 48px / 56px desktop; weight 700
+- Page title: 28px / 36px mobile; 32px / 40px desktop; weight 600–700
+- Section heading: 20px / 28px; weight 600
+- Card title: 16px / 24px; weight 600
+- Body: 16px / 24px; weight 400
+- Secondary text: 14px / 20px; weight 400
+- Micro labels: 12px / 16px; weight 500
+
+Large headings may use approximately -0.02em letter spacing.
+
+Typography principles:
+- Strong hierarchy without excessive font sizes.
+- Body copy should remain highly readable.
+- Avoid unnecessary all-caps text.
+- Use weight and spacing before introducing additional colors.
+- Service titles should remain visually prominent over secondary provider metadata.
+
+SPACING SYSTEM
+
+Base unit: 4px
+Core scale: 4 / 8 / 12 / 16 / 20 / 24 / 32 / 40 / 48 / 64
+
+Practical rules:
+- Mobile page padding: 16px
+- Desktop page padding: 24–32px
+- Card padding: 16–20px
+- Gap between cards: 12–16px
+- Section spacing: 32–48px
+- Button height: 48px
+- Input height: 48px
+- Icon + text gap: 8–12px
+- Mobile bottom page padding: 32–48px (with system safe-area handling where required)
+- No bottom navigation in the MVP
+
+SHAPE & COMPONENT FEEL
+
+- Cards: 10–12px radius
+- Inputs: 8–10px radius
+- Buttons: 8–10px radius
+- Avoid excessive pill-shaped controls.
+- Pills are reserved for small tags / badges where useful.
+- Avoid overly soft / bubbly visual treatment.
+
+INTERACTION
+
+Primary button:
+- Accent background
+- Near-black / deep charcoal text (for contrast)
+- Accent hover state
+- 48px minimum height
+
+Secondary button:
+- Neutral surface or transparent background
+- Subtle border
+- Light primary text
+
+Destructive action:
+- Error semantic color
+- Used sparingly and primarily in admin
+
+Focus:
+- Clearly visible focus treatment using the accent / accessible contrast
+- Keyboard navigation must remain visible
+
+ACCESSIBILITY
+
+- Maintain readable contrast between text and dark surfaces.
+- Do not rely on color alone to communicate status.
+- Interactive targets should be comfortable on mobile.
+- Long descriptions and metadata should use light neutral text rather than low-contrast accent colors.
+
+IMPLEMENTATION PRINCIPLE
+
+The design system should make the product feel consistent without making every component visually heavy.
+
+Use:
+- Neutral surfaces
+- Restrained borders
+- Clear typography
+- Generous but controlled spacing
+- Selective rose accents
+- Real provider / service imagery
+
+Avoid:
+- Gradients as a default visual treatment
+- Excessive shadows
+- Excessive rounded corners
+- Decorative color overload
+- Fake social-proof UI
+- Unnecessary animation
+
+
+────────────────────────────────────────
+0.12 REUSABLE UI COMPONENTS
+────────────────────────────────────────
+
+PRINCIPLE
+
+Do not build a huge design system.
+For the MVP, we want enough reusable pieces to build every locked screen consistently without over-engineering.
+
+COMPONENT GROUPS
+
+1. Global / Layout
+
+| Component   | Purpose                                      |
+|-------------|----------------------------------------------|
+| Header      | Desktop / mobile site navigation             |
+| MobileMenu  | Mobile navigation drawer / menu              |
+| Footer      | Simple site footer                           |
+| Container   | Consistent page width and horizontal padding |
+| PageHeader  | Reusable title + description area            |
+| Section     | Consistent vertical section spacing          |
+| Breadcrumbs | Service / detail navigation                  |
+| BackButton  | Mobile / detail-page navigation              |
+
+Important: Container, Section, and PageHeader should control layout — not individual pages inventing their own spacing.
+
+2. Core UI
+
+| Component    | Purpose                                      |
+|--------------|----------------------------------------------|
+| Button       | Primary, secondary, ghost, destructive       |
+| IconButton   | Compact icon actions                         |
+| Input        | Text fields                                  |
+| Textarea     | Longer descriptions                          |
+| Select       | Category / location selection                |
+| Checkbox     | Form options                                 |
+| Label        | Form labels                                  |
+| Badge        | Small status / category labels               |
+| Card         | General surface container                    |
+| Divider      | Subtle separation                            |
+| EmptyState   | No-results / no-content state                |
+| LoadingState | Loading content                              |
+| Alert        | Success / warning / error messaging          |
+| Avatar       | Consistent provider / user image with fallback |
+| Dialog       | Base accessible dialog / modal primitive     |
+
+Keep these components boring and predictable.
+
+3. Lagos Services Components
+
+SearchBar
+Used on: Homepage, Services page, potentially category pages
+Same component and behavior everywhere.
+Supports: [ 🔍 What service do you need? ] [Search]
+On mobile it can stack naturally.
+
+CategoryCard
+Used on the homepage and category discovery.
+Example structure:
+┌─────────────────────────┐
+│   🔧                    │
+│   Plumbing              │
+│   Find plumbing services│
+└─────────────────────────┘
+Category data comes from Supabase — not hardcoded.
+
+ServiceCard
+The most important reusable component.
+Used on: Homepage, Search results, Category pages, Provider profile, potentially related services.
+Structure:
+┌─────────────────────────────┐
+│        Service Image        │
+├─────────────────────────────┤
+│ Plumbing Installation       │
+│ Chinedu Okafor              │
+│ Ikeja, Lagos                │
+│ ₦50,000                     │
+│ View Service →              │
+└─────────────────────────────┘
+Accepts service data. Does not know about any particular provider.
+
+ServiceImage
+Reusable image wrapper for service photos.
+Responsibilities:
+- Consistent aspect ratio
+- Responsive sizing
+- object-fit handling
+- Fallback when no image exists
+- Graceful broken-image handling
+
+ProviderSummary
+Compact representation of the provider:
+[Avatar] Chinedu Okafor
+         Ikeja, Lagos
+Links to /providers/[profile-id]
+Used inside ServiceCard and potentially elsewhere.
+
+ContactActions
+Reusable WhatsApp + Call actions.
+[ WhatsApp ] [ Call ]
+Used primarily on Service detail and Provider profile.
+Handles the correct external action without introducing in-app messaging.
+
+ServiceMeta
+Small reusable information row:
+Category     Plumbing
+Location     Ikeja, Lagos
+Price        ₦50,000
+Useful on service detail and potentially other service surfaces.
+
+4. Form Components
+
+| Component     | Purpose                                         |
+|---------------|-------------------------------------------------|
+| FormField     | Label + control + validation                    |
+| FormSection   | Groups related fields                           |
+| ImageUploader | Upload / preview / remove service images        |
+| ImagePreview  | Individual uploaded image                       |
+| FormProgress  | Multi-step listing progress                     |
+| ReviewSection | Shows submitted information before confirmation |
+| SubmitState   | Submission / loading / success state            |
+
+Form components know how to display and validate UI.
+They do not contain business logic for creating profiles / services.
+
+5. Admin Components
+
+| Component      | Purpose                          |
+|----------------|----------------------------------|
+| AdminHeader    | Admin navigation / context       |
+| StatusBadge    | Pending / Approved / Rejected    |
+| SubmissionCard | Pending submission summary       |
+| ReviewPanel    | Full submission review           |
+| AdminActions   | Approve / Reject / Edit / Delete |
+| RejectDialog   | Required rejection reason        |
+| ConfirmDialog  | Destructive action confirmation  |
+| AdminStats     | Pending / approved / rejected counts |
+
+Reuse the same core components. Keep admin visually connected to the public product.
+
+COMPONENT HIERARCHY
+
+Design Tokens
+    ↓
+Primitive UI
+    ↓
+Shared Layout
+    ↓
+Lagos Services Components
+    ↓
+Pages
+
+Example:
+Button → ContactActions → ServiceDetail
+Card → ServiceCard → Homepage / Services / Provider Profile / Category Page
+
+One ServiceCard, reused everywhere.
+Do not build four slightly different service cards.
+
+PROPOSED FOLDER STRUCTURE
+
+components/
+├── ui/
+│   ├── button.tsx
+│   ├── icon-button.tsx
+│   ├── input.tsx
+│   ├── textarea.tsx
+│   ├── select.tsx
+│   ├── checkbox.tsx
+│   ├── label.tsx
+│   ├── badge.tsx
+│   ├── card.tsx
+│   ├── alert.tsx
+│   ├── divider.tsx
+│   ├── empty-state.tsx
+│   ├── loading-state.tsx
+│   ├── avatar.tsx
+│   └── dialog.tsx
+│
+├── layout/
+│   ├── header.tsx
+│   ├── mobile-menu.tsx
+│   ├── footer.tsx
+│   ├── container.tsx
+│   ├── section.tsx
+│   ├── page-header.tsx
+│   ├── breadcrumbs.tsx
+│   └── back-button.tsx
+│
+├── services/
+│   ├── search-bar.tsx
+│   ├── category-card.tsx
+│   ├── service-card.tsx
+│   ├── service-image.tsx
+│   ├── service-meta.tsx
+│   └── contact-actions.tsx
+│
+├── providers/
+│   └── provider-summary.tsx
+│
+├── forms/
+│   ├── form-field.tsx
+│   ├── form-section.tsx
+│   ├── image-uploader.tsx
+│   ├── image-preview.tsx
+│   ├── form-progress.tsx
+│   ├── review-section.tsx
+│   └── submit-state.tsx
+│
+└── admin/
+    ├── admin-header.tsx
+    ├── status-badge.tsx
+    ├── submission-card.tsx
+    ├── review-panel.tsx
+    ├── admin-actions.tsx
+    ├── reject-dialog.tsx
+    ├── confirm-dialog.tsx
+    └── admin-stats.tsx
+
+WHAT WE DELIBERATELY DO NOT MAKE INTO COMPONENTS YET
+
+- PremiumButton
+- FeaturedServiceCard
+- TopProviderCard
+- RecommendedServiceCard
+- VerifiedProviderCard
+- TrendingServiceCard
+- PricingCard
+- TestimonialCard
+- StatsCard
+- AnimatedHero
+- SmartSearch
+- AIRecommendationCard
+
+COMPONENT RULES
+
+Rule 1 — Reuse before duplicating
+If two screens need essentially the same UI, create one component.
+
+Rule 2 — Components receive data
+ServiceCard(service) — not ServiceCard() that fetches its own service.
+Pages / data layers handle fetching.
+
+Rule 3 — Components don't own business logic
+A button can display "Approve."
+It should not secretly know how to approve a service in Supabase.
+
+Rule 4 — Keep components composable
+Prefer composition (Card + ServiceImage + ProviderSummary + ServiceMeta + Button)
+over one enormous component that does everything.
+
+Rule 5 — Mobile-first
+Every component starts with the mobile layout and expands for desktop.
+
+Rule 6 — Accessibility is part of the component
+Buttons, inputs, dialogs, focus states, labels, keyboard interaction and touch targets are handled at the component level.
+
+Rule 7 — Variants over new components
+Prefer variant="primary" | "secondary" | "ghost" | "destructive"
+and size="sm" | "md" | "lg"
+on existing components rather than creating PremiumButton, FeaturedServiceCard, etc.
+
+FINAL LOCKED COMPONENT LIST
+
+Global / Layout
+- Header
+- MobileMenu
+- Footer
+- Container
+- Section
+- PageHeader
+- Breadcrumbs
+- BackButton
+
+Core UI
+- Button
+- IconButton
+- Input
+- Textarea
+- Select
+- Checkbox
+- Label
+- Badge
+- Card
+- Divider
+- EmptyState
+- LoadingState
+- Alert
+- Avatar
+- Dialog
+
+Services
+- SearchBar
+- CategoryCard
+- ServiceCard
+- ServiceImage
+- ServiceMeta
+- ContactActions
+
+Providers
+- ProviderSummary
+
+Forms
+- FormField
+- FormSection
+- ImageUploader
+- ImagePreview
+- FormProgress
+- ReviewSection
+- SubmitState
+
+Admin
+- AdminHeader
+- StatusBadge
+- SubmissionCard
+- ReviewPanel
+- AdminActions
+- RejectDialog
+- ConfirmDialog
+- AdminStats
+
+
+────────────────────────────────────────
+RESOLVED CLARIFICATIONS (from 0.13 review)
+────────────────────────────────────────
+
+1. CATEGORIES DIRECTORY PAGE (/categories)
+
+Treat as a simple grid of CategoryCards.
+Each card links into the services/search experience (or a filtered services view using the category).
+No new layout patterns or components are required.
+This keeps the page consistent with the rest of the system.
+
+2. PRIMARY BUTTON TEXT CONTRAST
+
+Primary buttons use Accent background (#E8B4B8).
+Button label text must be near-black / deep charcoal for strong readability.
+Do not use pure white text on the soft rose background.
+
+3. SEARCH CONSISTENCY
+
+The identical SearchBar component and behavior is used on:
+- Homepage
+- Services page
+- Category results (where relevant)
+
+No separate search implementations.
+
+4. ADDING A SECOND SERVICE
+
+For MVP, a provider adds another service by going through the List Your Services flow again.
+The system creates or updates the Profile and attaches a new Service.
+No provider dashboard or dedicated "add another service" management screen is required in MVP.
+
+
+────────────────────────────────────────
+0.13 FINAL LOCK STATEMENT
+────────────────────────────────────────
+
+This document freezes the MVP UI design direction for Lagos Services.
+
+All screens, flows, visual decisions, component inventory, and exclusions defined above are now locked.
+
+Future changes should be treated as deliberate design-system or product decisions, not incidental implementation choices.
+
+The two primary jobs of the product remain:
+1. Help someone in Lagos find a service and contact the provider.
+2. Help a provider list a service for review and public discovery.
+
+Everything else is secondary until real usage proves otherwise.

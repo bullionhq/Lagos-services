@@ -1,0 +1,99 @@
+LAGOS SERVICES — PHASE 0 PROGRESS
+================================
+
+STATUS
+------
+Phase 0 is the Product + UI/UX Foundation phase.
+
+COMPLETED
+---------
+[x] 0.1 Define primary user journeys
+[x] 0.2 Define site structure
+[x] 0.3 Define navigation
+[x] 0.4 Design homepage
+[x] 0.5 Design services/search page
+[x] 0.6 Design service detail page
+[x] 0.7 Design provider profile
+[x] 0.8 Design "List Your Services" flow
+[x] 0.9 Design admin interface
+[x] 0.10 Define mobile layouts
+
+NEXT
+----
+[ ] 0.5 Design services/search page
+
+LOCKED HOMEPAGE
+---------------
+1. Header
+   - Logo
+   - Services
+   - Categories
+   - List Your Services
+   - Search
+
+2. Hero
+   - Headline: "Find someone who can get it done."
+   - Supporting line: "Skilled people. Real services. Lagos."
+   - Prominent service search input
+   - Placeholder: "What service do you need?"
+   - Helper examples: "Try 'plumber', 'makeup artist', 'generator repair'…"
+
+3. Categories
+   - Heading: "Browse services"
+   - Show 6–8 initial categories
+   - "View all categories" link
+   - Example categories may include Plumbing, Electrical, Cleaning, Repairs, Beauty, Photography, Catering, Construction.
+   - Final category data will come from Supabase.
+
+4. Service Listings
+   - Heading: "Services people are offering"
+   - Service cards are service-focused.
+   - Card information:
+     * Service image when available
+     * Service title
+     * Provider name
+     * Lagos/location
+     * Price/rate when supplied
+     * View Service action
+
+5. Provider CTA
+   - Heading: "Have a service to offer?"
+   - Supporting text: "Put your services in front of people looking for them."
+   - Primary action: "List Your Services"
+
+6. Footer
+   - Keep simple and useful.
+   - Core links may include Lagos Services, Services, Categories, List Your Services, About, Contact, Privacy, Terms.
+
+DESIGN BOUNDARIES
+-----------------
+Do not add to the MVP homepage:
+- Giant map
+- Reviews/ratings
+- Top-provider rankings
+- Complex filters
+- Pricing marketplace
+- Fake testimonials or statistics
+- Login/signup as a dominant header action
+- AI recommendations
+- Huge promotional banners
+- Excessive CTAs
+
+MOBILE
+------
+- Logo + menu
+- Hero
+- Search
+- Categories
+- Service cards
+- Provider CTA
+- Footer
+
+PRODUCT RULE
+------------
+The homepage is designed around the two primary MVP actions:
+1. Find a service.
+2. List a service.
+
+Provider identity is visible, but discovery remains service-focused.
+Provider profiles are reached through service listings, not the primary navigation.

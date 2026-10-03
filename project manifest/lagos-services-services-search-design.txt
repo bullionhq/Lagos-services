@@ -1,0 +1,124 @@
+LAGOS SERVICES — SERVICES / SEARCH PAGE DESIGN SPEC
+====================================================
+
+STATUS: LOCKED
+PHASE: 0.5 — Design services/search page
+
+PURPOSE
+-------
+The services page is the main public discovery screen.
+Its primary question is:
+"Can I find the service I need?"
+
+STRUCTURE
+---------
+1. Header
+2. Page title
+3. Search bar
+4. Category filter
+5. Location filter
+6. Results summary
+7. Service cards
+8. Pagination / Load more
+
+TOP SECTION
+-----------
+Heading:
+"Find a service"
+
+Search placeholder:
+"Search for a service..."
+
+Example searches:
+- plumber
+- generator repair
+- makeup artist
+- photographer
+
+FILTERS
+-------
+Keep MVP filtering simple.
+
+Category:
+- All categories
+- Actual categories from Supabase
+
+Location:
+- All Lagos
+- Locations represented by actual service data
+
+Do not add maps, radius sliders, distance calculations, or complex filter systems.
+
+RESULTS
+-------
+Show a results summary such as:
+"24 services found"
+
+Service cards contain:
+- Service image, when available
+- Service title
+- Provider name
+- Location
+- Price/rate, when supplied
+- View Service action
+
+SERVICE-FIRST RULE
+------------------
+The service title is the visual priority.
+Provider identity is visible but secondary.
+
+A provider may have multiple services.
+Each service is independently searchable and links back to the same provider profile.
+
+SEARCH BEHAVIOR
+---------------
+Search should match relevant service information, especially:
+- Service title
+- Description
+- Category
+- Location
+
+Only approved services are publicly searchable.
+
+EMPTY STATE
+-----------
+Heading:
+"No services found"
+
+Supporting text:
+"We couldn't find a service matching your search. Try a different search or browse our categories."
+
+Action:
+"Browse Categories"
+
+Do not invent recommendations or fake results.
+
+MOBILE
+------
+Mobile order:
+1. Header
+2. Find a service
+3. Search
+4. Compact Category and Location filters
+5. Results summary
+6. Service cards
+
+Filters should remain compact and should not dominate the screen.
+
+INTENTIONALLY OUT OF MVP
+------------------------
+- Ratings/reviews
+- Provider rankings
+- "Best provider" labels
+- Distance sorting
+- Maps
+- Availability calendars
+- Advanced price filters
+- AI recommendations
+- Sponsored results
+- Complex sorting systems
+
+UX PRINCIPLE
+------------
+Discovery is service-first, not provider-first.
+The user should be able to search, filter, scan services, and open a service detail page with minimal friction.

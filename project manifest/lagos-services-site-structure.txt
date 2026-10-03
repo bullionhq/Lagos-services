@@ -1,0 +1,84 @@
+LAGOS SERVICES — SITE STRUCTURE
+===============================
+
+STATUS: LOCKED
+
+PUBLIC SITE
+-----------
+
+/                         Home
+/services                 Service search and discovery
+/services/[service-id]    Individual service detail
+/categories               Category directory
+/categories/[category-slug] Category results
+/providers/[profile-id]   Provider profile
+/list-your-services       Provider submission flow
+
+ADMIN SITE
+----------
+
+/admin                    Admin dashboard
+/admin/pending            Pending submissions
+/admin/approved           Approved services
+/admin/rejected           Rejected services
+
+PUBLIC NAVIGATION PRINCIPLE
+---------------------------
+
+The main navigation is service-focused:
+
+- Services
+- Categories
+- List Your Services
+
+Provider profiles are not a primary navigation item. Users primarily
+reach them through a service:
+
+Search / Browse → Service → Provider Profile → Other Services
+
+CORE PUBLIC FLOW
+----------------
+
+Homepage
+  ↓
+Search / Browse Category
+  ↓
+Services Results
+  ↓
+Service Detail
+  ↓
+Provider Profile
+  ↓
+WhatsApp / Phone
+
+PRODUCT MODEL
+-------------
+
+A profile represents a person, provider, or business.
+
+A profile can have multiple services.
+
+Example:
+
+/providers/chinedu-okafor
+  ├── Plumbing
+  ├── Electrical Installation
+  └── Generator Repair
+
+URL PRINCIPLES
+--------------
+
+Services:    /services/[service-id]
+Categories:  /categories/[category-slug]
+Providers:   /providers/[profile-id]
+Submission:  /list-your-services
+Admin:       /admin/...
+
+MVP BOUNDARY
+------------
+
+Do not add additional major public sections unless they clearly
+support one of the locked primary user journeys.
+
+The structure should remain intentionally small until real usage
+demonstrates a need for expansion.

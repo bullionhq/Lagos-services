@@ -1,0 +1,125 @@
+LAGOS SERVICES — NAVIGATION SPECIFICATION
+============================================
+
+STATUS: LOCKED
+
+PURPOSE
+-------
+This document defines the MVP navigation for Lagos Services.
+
+
+1. DESKTOP HEADER
+-----------------
+
+Primary header:
+
+Logo → /
+Services → /services
+Categories → /categories
+List Your Services → /list-your-services
+Search → service search experience
+
+Navigation principle:
+- Keep the header simple.
+- Make service discovery prominent.
+- Make "List Your Services" the primary provider CTA.
+
+
+2. MOBILE HEADER
+----------------
+
+Mobile header:
+
+Logo
+Menu button
+
+When opened:
+
+- Services
+- Categories
+- List Your Services
+
+Search remains prominent on the homepage and services/discovery
+experience rather than being buried in the menu.
+
+
+3. SEARCH
+---------
+
+Search is a primary product action.
+
+The homepage should prominently present a service search field.
+
+Example:
+
+"Find someone who can get it done."
+
+[ What service do you need?                         Search ]
+
+Search should also be readily available on the services/discovery
+page.
+
+
+4. PROVIDER NAVIGATION
+----------------------
+
+There is no "Providers" item in the primary navigation.
+
+Reason:
+Users primarily arrive with a service need.
+
+The intended discovery path is:
+
+Need
+  ↓
+Service
+  ↓
+Provider
+  ↓
+Other services from that provider
+
+Provider profiles remain first-class public pages and are reachable
+through service listings.
+
+
+5. FOOTER
+---------
+
+The footer may contain:
+
+Lagos Services
+- Services
+- Categories
+- List Your Services
+- About
+- Contact
+- Privacy
+- Terms
+
+Secondary pages such as About, Contact, Privacy, and Terms are not
+necessarily part of the initial implementation and should only be
+built when required.
+
+
+6. PRIMARY ACTIONS
+------------------
+
+For service seekers:
+- Search for a service
+- Browse categories
+- Open a service
+- Contact provider
+
+For providers:
+- List Your Services
+
+
+7. NAVIGATION RULE
+------------------
+
+Do not add navigation items merely because a page exists.
+
+Every primary navigation item should support one of the locked
+primary user journeys.
+
+Keep the MVP navigation intentionally small.

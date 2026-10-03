@@ -1,0 +1,326 @@
+LAGOS SERVICES — MVP BUILD CHECKLIST
+================================
+
+Purpose
+-------
+Build and launch a minimal Lagos service listing platform quickly,
+at minimal cost, using Next.js + Supabase + GitHub + Cloudflare.
+
+Working principle
+-----------------
+- Build the smallest useful thing.
+- Ship early.
+- Do not add features outside this checklist unless we explicitly decide to.
+- Cross off items in order.
+- When something needs rework, update the relevant item rather than starting over.
+
+STACK
+-----
+[ ] Next.js (App Router)
+[ ] TypeScript
+[ ] Tailwind CSS
+[ ] Supabase PostgreSQL
+[ ] Supabase Auth (when admin auth is needed)
+[ ] Supabase Storage (for listing images)
+[ ] GitHub
+[ ] Cloudflare deployment
+[ ] WhatsApp for provider contact
+[ ] Custom domain (optional; only after the site works)
+
+PHASE 0 — LOCAL SETUP
+---------------------
+[ ] 0.1 Install Node.js
+[ ] 0.2 Create the Next.js application
+[ ] 0.3 Run the application locally
+[ ] 0.4 Confirm localhost:3000 works
+[ ] 0.5 Initialize/confirm Git repository
+[ ] 0.6 Create GitHub repository
+[ ] 0.7 Push initial code to GitHub
+[ ] 0.8 Create a simple README
+[ ] 0.9 Create .env.local
+[ ] 0.10 Make sure secrets/env files are not committed
+
+PHASE 1 — SUPABASE
+------------------
+[ ] 1.1 Create Supabase project
+[ ] 1.2 Get project URL and publishable key
+[ ] 1.3 Add Supabase environment variables locally
+[ ] 1.4 Install/configure Supabase client
+[ ] 1.5 Create database schema
+[ ] 1.6 Create categories table
+[ ] 1.7 Create services/listings table
+[ ] 1.8 Add initial categories
+[ ] 1.9 Enable Row Level Security
+[ ] 1.10 Create safe policies for public listing reads
+[ ] 1.11 Create policies for listing submissions
+[ ] 1.12 Test database connection from Next.js
+
+MVP DATA MODEL
+--------------
+Profiles:
+- id
+- user_id (nullable initially)
+- name
+- bio
+- phone
+- whatsapp
+- location
+- avatar_url
+- created_at
+- updated_at
+
+Services:
+- id
+- profile_id -> profiles.id
+- category_id -> categories.id
+- title
+- description
+- price
+- price_unit
+- images
+- status
+- created_at
+- updated_at
+
+Categories:
+- id
+- name
+- slug
+
+Relationship:
+- One profile can have many services.
+- A person creates/owns a profile.
+- Each person can add services to their profile as they see fit.
+- A service belongs to exactly one profile and one category.
+- Public discovery is based on services, while the provider identity lives on the profile.
+
+Initial service status values:
+- pending
+- approved
+- rejected
+
+IMPORTANT DISTINCTION
+---------------------
+The product is NOT a directory of "skills".
+
+A profile represents a person/provider.
+A service represents something that provider offers.
+A provider may offer one service or many services.
+
+Example:
+
+Chinedu Okafor (profile)
+  -> Plumbing
+  -> Electrical installation
+  -> Generator repair
+
+Do not duplicate provider identity fields across services.
+
+PHASE 2 — APP FOUNDATION
+------------------------
+[ ] 2.1 Create global layout
+[ ] 2.2 Create header/navigation
+[ ] 2.3 Create basic typography/spacing system
+[ ] 2.4 Create reusable ServiceCard component
+[ ] 2.5 Create reusable CategoryCard component
+[ ] 2.6 Create basic loading states
+[ ] 2.7 Create basic error states
+[ ] 2.8 Make layout responsive for mobile
+
+PHASE 3 — HOME PAGE
+-------------------
+[ ] 3.1 Build homepage
+[ ] 3.2 Add simple headline/value proposition
+[ ] 3.3 Add service search input
+[ ] 3.4 Add category list
+[ ] 3.5 Add recent/featured approved listings
+[ ] 3.6 Add "List your service" CTA
+[ ] 3.7 Add basic footer
+
+Suggested homepage message:
+"Find someone who can get it done."
+"Serviceed people. Real services. Lagos."
+
+PHASE 4 — SEARCH & DISCOVERY
+----------------------------
+[ ] 4.1 Create /services page
+[ ] 4.2 Fetch approved listings from Supabase
+[ ] 4.3 Display listings as cards
+[ ] 4.4 Add keyword search
+[ ] 4.5 Add category filtering
+[ ] 4.6 Add location filtering
+[ ] 4.7 Add empty-search-results state
+[ ] 4.8 Add /categories/[slug] pages
+[ ] 4.9 Confirm only approved listings are publicly visible
+
+PHASE 5 — INDIVIDUAL LISTING PAGES
+----------------------------------
+[ ] 5.1 Create /services/[id] page
+[ ] 5.2 Display provider name
+[ ] 5.3 Display service title
+[ ] 5.4 Display description
+[ ] 5.5 Display category
+[ ] 5.6 Display location
+[ ] 5.7 Display price/rate when supplied
+[ ] 5.8 Display listing images when supplied
+[ ] 5.9 Add WhatsApp contact button
+[ ] 5.10 Add phone/call button
+[ ] 5.11 Add basic metadata/title for SEO
+[ ] 5.12 Add not-found handling
+
+PHASE 6 — LIST YOUR SKILL
+-------------------------
+[ ] 6.1 Create /list-your-service page
+[ ] 6.2 Build service submission form
+[ ] 6.3 Add provider/profile name field
+[ ] 6.4 Add service title field
+[ ] 6.5 Add category selector
+[ ] 6.6 Add description field
+[ ] 6.7 Add location field
+[ ] 6.8 Add price field (optional)
+[ ] 6.9 Add price unit field (optional)
+[ ] 6.10 Add phone field
+[ ] 6.11 Add WhatsApp field
+[ ] 6.12 Add image upload
+[ ] 6.13 Validate form input
+[ ] 6.14 Save submission as pending
+[ ] 6.15 Show successful service-submission message
+[ ] 6.16 Handle submission errors
+[ ] 6.17 Create/reuse provider profile when a service is submitted
+[ ] 6.18 Allow a provider to add another service to their existing profile
+
+PHASE 7 — ADMIN
+---------------
+[ ] 7.1 Enable Supabase Auth for admin
+[ ] 7.2 Create admin user
+[ ] 7.3 Protect /admin route
+[ ] 7.4 Create pending-listings view
+[ ] 7.5 Add approve action
+[ ] 7.6 Add reject action
+[ ] 7.7 Add edit action
+[ ] 7.8 Add delete action
+[ ] 7.9 Create approved-listings view
+[ ] 7.10 Create rejected-listings view
+[ ] 7.11 Verify non-admin users cannot perform admin actions
+
+PHASE 8 — SEO & BASIC QUALITY
+-----------------------------
+[ ] 8.1 Set site title
+[ ] 8.2 Set site description
+[ ] 8.3 Add page metadata
+[ ] 8.4 Add meaningful URLs/slugs where appropriate
+[ ] 8.5 Add sitemap
+[ ] 8.6 Add robots.txt
+[ ] 8.7 Add Open Graph metadata
+[ ] 8.8 Check mobile layout
+[ ] 8.9 Check major browsers
+[ ] 8.10 Check broken links
+[ ] 8.11 Check forms
+[ ] 8.12 Check WhatsApp links
+[ ] 8.13 Check image loading
+[ ] 8.14 Check database security/RLS
+[ ] 8.15 Remove console errors
+[ ] 8.16 Remove obvious placeholder content
+
+PHASE 9 — DEPLOYMENT
+--------------------
+[ ] 9.1 Choose production deployment configuration for Next.js + Cloudflare
+[ ] 9.2 Connect GitHub repository
+[ ] 9.3 Configure production environment variables
+[ ] 9.4 Deploy first production build
+[ ] 9.5 Confirm production site works
+[ ] 9.6 Test database connection in production
+[ ] 9.7 Test image uploads in production
+[ ] 9.8 Test admin login in production
+[ ] 9.9 Test listing submission in production
+[ ] 9.10 Test WhatsApp links in production
+[ ] 9.11 Confirm automatic deployment from GitHub
+[ ] 9.12 Confirm a new push updates the site
+
+PHASE 10 — DOMAIN
+-----------------
+[ ] 10.1 Choose domain name
+[ ] 10.2 Buy domain only after MVP is working
+[ ] 10.3 Connect domain to deployment
+[ ] 10.4 Enable/confirm HTTPS
+[ ] 10.5 Confirm www/root-domain behavior
+
+PHASE 11 — SEED THE MARKET
+--------------------------
+[ ] 11.1 Add first 10 plumber listings
+[ ] 11.2 Add first 10 electrician listings
+[ ] 11.3 Add first 10 photographer listings
+[ ] 11.4 Add first 10 makeup/beauty listings
+[ ] 11.5 Add first 10 cleaner listings
+[ ] 11.6 Verify all seed listings
+[ ] 11.7 Confirm categories make sense
+[ ] 11.8 Confirm search works with real-world terms
+
+PHASE 12 — MVP LAUNCH
+---------------------
+[ ] 12.1 Invite first users
+[ ] 12.2 Give providers the listing link
+[ ] 12.3 Observe what users search for
+[ ] 12.4 Record requests that cannot be fulfilled
+[ ] 12.5 Record confusing parts of the site
+[ ] 12.6 Fix critical usability problems
+[ ] 12.7 Launch publicly
+
+DELIBERATELY OUT OF MVP
+-----------------------
+Do NOT build these unless real usage gives us a reason:
+
+[ ] Payments
+[ ] Escrow
+[ ] In-app messaging/chat
+[ ] Reviews/ratings
+[ ] Provider subscriptions
+[ ] Provider analytics
+[ ] Automated verification
+[ ] Maps/geolocation
+[ ] Mobile app
+[ ] AI matching
+[ ] Complex notifications
+[ ] Multi-vendor payouts
+[ ] Recommendation engine
+
+DEFINITION OF MVP DONE
+----------------------
+The MVP is DONE when a real person can:
+
+1. Open the website.
+2. Search for a service.
+3. Browse categories.
+4. Open an approved provider listing.
+5. See useful service/provider information.
+6. Contact the provider through WhatsApp or phone.
+7. Create a provider profile and submit a service.
+8. Add additional services to the same profile as needed.
+9. Have service submissions reviewed by the admin.
+10. Have approved services appear publicly under the provider profile.
+
+CONTINUOUS DEPLOYMENT LOOP
+--------------------------
+Every meaningful change should follow:
+
+1. Make change locally.
+2. Test locally.
+3. git add .
+4. git commit -m "describe change"
+5. git push
+6. Check deployment/preview.
+7. Test the deployed change.
+8. If good, keep it.
+9. If bad, fix or revert.
+10. Cross off the relevant checklist item.
+
+RULE FOR THIS PROJECT
+---------------------
+We do not need to know the entire future architecture.
+
+We only need to make the NEXT unchecked item work.
+
+When an item is completed, mark:
+[ ] → [x]
+
+Keep this file as the source of truth for MVP progress.

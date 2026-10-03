@@ -1,0 +1,145 @@
+LAGOS SERVICES — PROVIDER PROFILE DESIGN SPEC
+================================================
+
+STATUS: LOCKED
+PHASE: 0.7 — Design provider profile
+
+PURPOSE
+-------
+The provider profile represents the person, professional, or business behind the services.
+
+CORE MODEL
+----------
+One profile → multiple services.
+
+The profile builds context around the provider and provides access to all of that provider's approved public services.
+
+URL
+---
+/providers/[profile-id]
+
+STRUCTURE
+---------
+1. Header
+2. Provider identity
+   - Name
+   - Profile image/logo, optional
+   - Location
+   - Bio
+3. Contact actions
+   - WhatsApp
+   - Call
+4. Services offered
+5. Back/browse services
+
+PROVIDER IDENTITY
+-----------------
+Example:
+Chinedu Okafor
+Generator & Electrical Services
+Ikeja, Lagos
+
+Bio:
+A short provider-written description.
+
+Profile image/logo:
+Optional.
+If absent, use a clean neutral fallback. Do not fabricate provider imagery.
+
+CONTACT
+-------
+Place WhatsApp and Call actions near the provider identity.
+
+WhatsApp:
+- Opens a WhatsApp conversation using the provider's WhatsApp number.
+- May include the provider name in the initial message.
+
+Call:
+- Opens the device phone dialer using the provider's phone number.
+
+SERVICES OFFERED
+----------------
+This is the most important section.
+
+Heading:
+"Services offered"
+
+Each service card can show:
+- Service title
+- Price/rate when supplied
+- Location
+- View Service action
+
+Each card links to:
+/services/[service-id]
+
+Only approved/public services belonging to the profile appear.
+
+NAVIGATION RELATIONSHIP
+-----------------------
+Service
+  ↓
+Provider Profile
+  ↓
+Other Services
+  ↓
+Service Detail
+
+Provider information is not duplicated unnecessarily across service records.
+
+MOBILE
+------
+Mobile-first order:
+1. Back
+2. Profile image/logo
+3. Provider name
+4. Provider category/descriptor
+5. Location
+6. Bio
+7. WhatsApp / Call
+8. Services offered
+9. Service cards
+
+EMPTY STATE
+-----------
+A public provider profile should normally have at least one approved service.
+
+If an edge case occurs:
+"No services available"
+
+Supporting text:
+"This provider currently has no public services."
+
+Action:
+"Browse Services"
+
+MVP EXCLUSIONS
+--------------
+Do not add:
+- Ratings
+- Reviews
+- Followers
+- Likes
+- Jobs completed counters
+- "Top provider" labels
+- Verification badges
+- Response-rate statistics
+- Provider rankings
+- Provider earnings
+- Analytics
+- Availability calendars
+- Complex portfolio systems
+
+DESIGN PRINCIPLE
+----------------
+The provider profile is not a social-media-style profile.
+
+Its primary purpose is:
+Provider identity → services → contact
+
+SEO
+---
+Use a meaningful provider title, for example:
+"Chinedu Okafor — Generator & Electrical Services | Lagos Services"
+
+Description should use available provider profile information and location without exposing unnecessary private information.
